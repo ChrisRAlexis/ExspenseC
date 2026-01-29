@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="450" viewBox="0 0 300 450">
+  <rect fill="#fefefe" width="300" height="450"/>
+  <rect fill="#001f5c" x="10" y="10" width="280" height="60" rx="4"/>
+
+  <text x="150" y="35" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold" fill="white">DELTA</text>
+  <text x="150" y="55" text-anchor="middle" font-family="Arial" font-size="10" fill="#ccc">E-TICKET RECEIPT</text>
+
+  <text x="30" y="95" font-family="Arial" font-size="10" fill="#666">Confirmation Number</text>
+  <text x="30" y="112" font-family="Courier, monospace" font-size="16" font-weight="bold">HXKR4M</text>
+
+  <text x="200" y="95" font-family="Arial" font-size="10" fill="#666">Issue Date</text>
+  <text x="200" y="112" font-family="Courier, monospace" font-size="12">01/02/2026</text>
+
+  <line x1="30" y1="130" x2="270" y2="130" stroke="#ccc"/>
+
+  <text x="30" y="150" font-family="Arial" font-size="10" fill="#666">Passenger</text>
+  <text x="30" y="167" font-family="Arial" font-size="12" font-weight="bold">MILLER/JAMES MR</text>
+
+  <rect fill="#f0f4ff" x="20" y="185" width="260" height="80" rx="4"/>
+
+  <text x="40" y="210" font-family="Arial" font-size="24" font-weight="bold">JFK</text>
+  <text x="40" y="225" font-family="Arial" font-size="9" fill="#666">New York</text>
+
+  <text x="130" y="215" font-family="Arial" font-size="20">→</text>
+
+  <text x="200" y="210" font-family="Arial" font-size="24" font-weight="bold">ORD</text>
+  <text x="200" y="225" font-family="Arial" font-size="9" fill="#666">Chicago</text>
+
+  <text x="40" y="250" font-family="Arial" font-size="10">DL 1247 • Jan 15 • 8:30 AM</text>
+
+  <rect fill="#f0f4ff" x="20" y="275" width="260" height="80" rx="4"/>
+
+  <text x="40" y="300" font-family="Arial" font-size="24" font-weight="bold">ORD</text>
+  <text x="40" y="315" font-family="Arial" font-size="9" fill="#666">Chicago</text>
+
+  <text x="130" y="305" font-family="Arial" font-size="20">→</text>
+
+  <text x="200" y="300" font-family="Arial" font-size="24" font-weight="bold">JFK</text>
+  <text x="200" y="315" font-family="Arial" font-size="9" fill="#666">New York</text>
+
+  <text x="40" y="340" font-family="Arial" font-size="10">DL 892 • Jan 18 • 6:15 PM</text>
+
+  <line x1="30" y1="370" x2="270" y2="370" stroke="#ccc"/>
+
+  <text x="30" y="395" font-family="Arial" font-size="11">Base Fare</text>
+  <text x="220" y="395" font-family="Courier" font-size="11" text-anchor="end">$458.00</text>
+
+  <text x="30" y="412" font-family="Arial" font-size="11">Taxes &amp; Fees</text>
+  <text x="220" y="412" font-family="Courier" font-size="11" text-anchor="end">$66.00</text>
+
+  <line x1="30" y1="425" x2="270" y2="425" stroke="#333"/>
+
+  <text x="30" y="445" font-family="Arial" font-size="14" font-weight="bold">Total</text>
+  <text x="220" y="445" font-family="Courier" font-size="14" font-weight="bold" text-anchor="end">$524.00</text>
+</svg>

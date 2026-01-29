@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="450" viewBox="0 0 300 450">
+  <rect fill="#fff" width="300" height="450"/>
+  <rect fill="#232f3e" x="10" y="10" width="280" height="55" rx="4"/>
+
+  <text x="150" y="32" text-anchor="middle" font-family="Arial" font-size="14" fill="#ff9900" font-weight="bold">amazon</text>
+  <text x="150" y="50" text-anchor="middle" font-family="Arial" font-size="16" fill="white" font-weight="bold">web services</text>
+
+  <text x="150" y="85" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold">AWS re:Invent 2024</text>
+  <text x="150" y="100" text-anchor="middle" font-family="Arial" font-size="10" fill="#666">Conference Registration</text>
+
+  <line x1="30" y1="115" x2="270" y2="115" stroke="#eee"/>
+
+  <text x="30" y="140" font-family="Arial" font-size="10" fill="#666">Order Number</text>
+  <text x="180" y="140" font-family="Courier" font-size="10">INV-2024-847291</text>
+
+  <text x="30" y="160" font-family="Arial" font-size="10" fill="#666">Order Date</text>
+  <text x="180" y="160" font-family="Arial" font-size="10">November 15, 2024</text>
+
+  <text x="30" y="180" font-family="Arial" font-size="10" fill="#666">Attendee</text>
+  <text x="180" y="180" font-family="Arial" font-size="10">Emma Davis</text>
+
+  <text x="30" y="200" font-family="Arial" font-size="10" fill="#666">Company</text>
+  <text x="180" y="200" font-family="Arial" font-size="10">TechCorp Inc.</text>
+
+  <line x1="30" y1="220" x2="270" y2="220" stroke="#eee"/>
+
+  <text x="30" y="245" font-family="Arial" font-size="11" font-weight="bold">Event Details</text>
+
+  <text x="30" y="270" font-family="Arial" font-size="10">AWS re:Invent 2024</text>
+  <text x="30" y="285" font-family="Arial" font-size="9" fill="#666">Dec 2-6, 2024 • Las Vegas, NV</text>
+
+  <text x="30" y="310" font-family="Arial" font-size="10">Full Conference Pass</text>
+  <text x="250" y="310" font-family="Courier" font-size="10" text-anchor="end">$1,799.00</text>
+
+  <line x1="30" y1="330" x2="270" y2="330" stroke="#eee"/>
+
+  <text x="30" y="355" font-family="Arial" font-size="10">Subtotal</text>
+  <text x="250" y="355" font-family="Courier" font-size="10" text-anchor="end">$1,799.00</text>
+
+  <text x="30" y="375" font-family="Arial" font-size="10">Tax</text>
+  <text x="250" y="375" font-family="Courier" font-size="10" text-anchor="end">$0.00</text>
+
+  <line x1="30" y1="395" x2="270" y2="395" stroke="#333"/>
+
+  <text x="30" y="420" font-family="Arial" font-size="14" font-weight="bold">Total Paid</text>
+  <text x="250" y="420" font-family="Courier" font-size="14" font-weight="bold" text-anchor="end">$1,799.00</text>
+
+  <text x="150" y="445" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">Payment: Corporate Card ending in 4521</text>
+</svg>

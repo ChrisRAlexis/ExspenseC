@@ -1,0 +1,17 @@
+{
+  "name": "Ledgra",
+  "short_name": "Ledgra",
+  "description": "Smart expense management with OCR receipt scanning",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f0fdf4",
+  "theme_color": "#059669",
+  "icons": [
+    {
+      "src": "/ledgra-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

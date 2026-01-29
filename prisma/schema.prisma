@@ -1,0 +1,333 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String
+  role          String    @default("EMPLOYEE") // EMPLOYEE, APPROVER, ADMIN
+  department    String?
+
+  // Manager relationship for approval chains
+  managerId     String?
+  manager       User?     @relation("ManagerRelation", fields: [managerId], references: [id])
+  directReports User[]    @relation("ManagerRelation")
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  expenses        Expense[]
+  approvalActions ApprovalAction[]
+  workflowSteps   WorkflowStep[]
+  payouts         Payout[]
+  policySteps     ApprovalPolicyStep[]
+}
+
+model Expense {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+
+  title         String
+  description   String?
+  totalAmount   Float
+  category      String    // Dynamic - references ExpenseCategory.name
+  tripName      String?
+  status        String    @default("DRAFT") // DRAFT, PENDING, APPROVED, REJECTED, CHANGES_REQUESTED, PAID
+
+  // Property > Job > Task hierarchy
+  propertyId    String?
+  property      Property? @relation(fields: [propertyId], references: [id])
+  jobId         String?
+  job           Job?      @relation(fields: [jobId], references: [id])
+  taskId        String?
+  task          Task?     @relation(fields: [taskId], references: [id])
+
+  // Approval workflow (legacy)
+  workflowId    String?
+  workflow      ApprovalWorkflow? @relation(fields: [workflowId], references: [id])
+  currentStep   Int       @default(0)
+  autoApproved  Boolean   @default(false)
+
+  // Unified approval policy
+  policyId      String?
+  policy        ApprovalPolicy? @relation(fields: [policyId], references: [id])
+
+  // Payout tracking
+  paidAt        DateTime?
+
+  submittedAt   DateTime?
+  approvedAt    DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  items           ExpenseItem[]
+  receipts        Receipt[]
+  approvalActions ApprovalAction[]
+  payouts         Payout[]
+}
+
+model ExpenseItem {
+  id          String   @id @default(cuid())
+  expenseId   String
+  expense     Expense  @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+
+  description String
+  amount      Float
+  category    String?
+  createdAt   DateTime @default(now())
+}
+
+model Receipt {
+  id          String   @id @default(cuid())
+  expenseId   String
+  expense     Expense  @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+
+  imagePath   String
+  ocrData     String?  // JSON string of extracted data
+  vendorName  String?
+  receiptDate DateTime?
+  totalAmount Float?
+  createdAt   DateTime @default(now())
+}
+
+// === Construction Hierarchy ===
+
+model Property {
+  id          String   @id @default(cuid())
+  name        String
+  address     String?
+  clientName  String?
+  status      String   @default("ACTIVE") // ACTIVE, COMPLETED, ON_HOLD
+  budget      Float    @default(0)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  jobs        Job[]
+  expenses    Expense[]
+  budgetAlerts BudgetAlert[]
+  autoApprovalRules AutoApprovalRule[]
+  approvalPolicies  ApprovalPolicy[]
+}
+
+model Job {
+  id          String   @id @default(cuid())
+  propertyId  String
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  name        String
+  description String?
+  status      String   @default("ACTIVE") // ACTIVE, COMPLETED, ON_HOLD
+  budget      Float    @default(0)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tasks       Task[]
+  expenses    Expense[]
+  budgetAlerts BudgetAlert[]
+  autoApprovalRules AutoApprovalRule[]
+  approvalPolicies  ApprovalPolicy[]
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  jobId       String
+  job         Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  name        String
+  description String?
+  status      String   @default("ACTIVE") // ACTIVE, COMPLETED, ON_HOLD
+  budget      Float    @default(0)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  expenses    Expense[]
+  budgetAlerts BudgetAlert[]
+}
+
+// === Dynamic Categories ===
+
+model ExpenseCategory {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  icon        String?  // emoji or icon name
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  autoApprovalRules AutoApprovalRule[]
+  approvalPolicies  ApprovalPolicy[]
+}
+
+// === Payout Tracking ===
+
+model Payout {
+  id              String   @id @default(cuid())
+  expenseId       String
+  expense         Expense  @relation(fields: [expenseId], references: [id])
+
+  amount          Float
+  paymentMethod   String   // CHECK, BANK_TRANSFER, CASH, CREDIT_CARD, OTHER
+  referenceNumber String?
+  notes           String?
+
+  paidById        String
+  paidBy          User     @relation(fields: [paidById], references: [id])
+
+  // Future payment integration fields
+  paymentProvider String?  // STRIPE, PAYPAL, etc.
+  paymentIntentId String?
+  paymentStatus   String?  // PENDING, COMPLETED, FAILED
+
+  createdAt       DateTime @default(now())
+}
+
+// === Auto-Approval Rules ===
+
+model AutoApprovalRule {
+  id          String   @id @default(cuid())
+  name        String
+  isActive    Boolean  @default(true)
+  priority    Int      @default(0) // Higher = checked first
+
+  // Conditions (AND logic - all non-null conditions must match)
+  maxAmount   Float?
+  categoryId  String?
+  category    ExpenseCategory? @relation(fields: [categoryId], references: [id])
+  propertyId  String?
+  property    Property? @relation(fields: [propertyId], references: [id])
+  jobId       String?
+  job         Job?      @relation(fields: [jobId], references: [id])
+  userRole    String?   // EMPLOYEE, APPROVER
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// === Budget Alerts ===
+
+model BudgetAlert {
+  id            String   @id @default(cuid())
+
+  propertyId    String?
+  property      Property? @relation(fields: [propertyId], references: [id])
+  jobId         String?
+  job           Job?      @relation(fields: [jobId], references: [id])
+  taskId        String?
+  task          Task?     @relation(fields: [taskId], references: [id])
+
+  thresholdPct  Float    @default(80) // Alert when spent reaches this % of budget
+  isActive      Boolean  @default(true)
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+// === Approval Workflow (existing) ===
+
+model ApprovalWorkflow {
+  id          String   @id @default(cuid())
+  name        String
+  type        String   // SEQUENTIAL, PARALLEL, MANAGER_CHAIN
+  isActive    Boolean  @default(true)
+  isDefault   Boolean  @default(false)
+
+  conditions  String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  steps     WorkflowStep[]
+  expenses  Expense[]
+}
+
+model WorkflowStep {
+  id          String   @id @default(cuid())
+  workflowId  String
+  workflow    ApprovalWorkflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+
+  approverId  String?
+  approver    User?    @relation(fields: [approverId], references: [id])
+
+  stepOrder   Int
+  isRequired  Boolean  @default(true)
+
+  amountThreshold Float?
+
+  createdAt   DateTime @default(now())
+}
+
+model ApprovalAction {
+  id          String   @id @default(cuid())
+  expenseId   String
+  expense     Expense  @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+
+  approverId  String
+  approver    User     @relation(fields: [approverId], references: [id])
+
+  action      String   // APPROVED, REJECTED, CHANGES_REQUESTED
+  comments    String?
+  stepNumber  Int
+
+  createdAt   DateTime @default(now())
+}
+
+// === Unified Approval Policies ===
+
+model ApprovalPolicy {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  isActive    Boolean  @default(true)
+  priority    Int      @default(0) // Higher = evaluated first
+
+  // AUTO_APPROVE = auto-approve matching expenses
+  // ROUTE_TO_APPROVERS = send to approval chain
+  actionType  String   // AUTO_APPROVE, ROUTE_TO_APPROVERS
+
+  // Conditions (AND logic - all non-null must match)
+  maxAmount   Float?
+  minAmount   Float?
+  categoryId  String?
+  category    ExpenseCategory? @relation(fields: [categoryId], references: [id])
+  propertyId  String?
+  property    Property? @relation(fields: [propertyId], references: [id])
+  jobId       String?
+  job         Job?      @relation(fields: [jobId], references: [id])
+  userRole    String?   // EMPLOYEE, APPROVER
+
+  // Routing config (only for ROUTE_TO_APPROVERS)
+  routingType String?   // SEQUENTIAL, PARALLEL
+  steps       ApprovalPolicyStep[]
+
+  expenses    Expense[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ApprovalPolicyStep {
+  id          String   @id @default(cuid())
+  policyId    String
+  policy      ApprovalPolicy @relation(fields: [policyId], references: [id], onDelete: Cascade)
+
+  approverId  String?
+  approver    User?    @relation(fields: [approverId], references: [id])
+
+  stepOrder   Int
+  isRequired  Boolean  @default(true)
+
+  createdAt   DateTime @default(now())
+}

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="450" viewBox="0 0 300 450">
+  <rect fill="#fefefe" width="300" height="450"/>
+  <rect fill="#8b0000" x="10" y="10" width="280" height="50" rx="4"/>
+
+  <text x="150" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="bold" fill="white">MARRIOTT</text>
+
+  <text x="150" y="80" text-anchor="middle" font-family="Arial" font-size="11" fill="#333">Chicago Marriott Downtown</text>
+  <text x="150" y="95" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">540 N Michigan Ave, Chicago, IL 60611</text>
+
+  <line x1="30" y1="110" x2="270" y2="110" stroke="#ccc"/>
+
+  <text x="30" y="130" font-family="Arial" font-size="10" fill="#666">Confirmation #</text>
+  <text x="150" y="130" font-family="Courier" font-size="10">92847561</text>
+
+  <text x="30" y="150" font-family="Arial" font-size="10" fill="#666">Guest Name</text>
+  <text x="150" y="150" font-family="Arial" font-size="10">James Miller</text>
+
+  <text x="30" y="170" font-family="Arial" font-size="10" fill="#666">Check In</text>
+  <text x="150" y="170" font-family="Arial" font-size="10">Jan 15, 2026 3:00 PM</text>
+
+  <text x="30" y="190" font-family="Arial" font-size="10" fill="#666">Check Out</text>
+  <text x="150" y="190" font-family="Arial" font-size="10">Jan 18, 2026 11:00 AM</text>
+
+  <text x="30" y="210" font-family="Arial" font-size="10" fill="#666">Room Type</text>
+  <text x="150" y="210" font-family="Arial" font-size="10">King Room - City View</text>
+
+  <line x1="30" y1="230" x2="270" y2="230" stroke="#ccc" stroke-dasharray="4"/>
+
+  <text x="30" y="255" font-family="Arial" font-size="11" font-weight="bold">CHARGES</text>
+
+  <text x="30" y="280" font-family="Arial" font-size="10">Room (3 nights @ $199)</text>
+  <text x="250" y="280" font-family="Courier" font-size="10" text-anchor="end">$597.00</text>
+
+  <text x="30" y="300" font-family="Arial" font-size="10">State Tax (10.25%)</text>
+  <text x="250" y="300" font-family="Courier" font-size="10" text-anchor="end">$61.19</text>
+
+  <text x="30" y="320" font-family="Arial" font-size="10">City Tax (4.5%)</text>
+  <text x="250" y="320" font-family="Courier" font-size="10" text-anchor="end">$26.87</text>
+
+  <text x="30" y="340" font-family="Arial" font-size="10">Tourism Fee</text>
+  <text x="250" y="340" font-family="Courier" font-size="10" text-anchor="end">$1.94</text>
+
+  <line x1="30" y1="360" x2="270" y2="360" stroke="#333"/>
+
+  <text x="30" y="385" font-family="Arial" font-size="14" font-weight="bold">TOTAL</text>
+  <text x="250" y="385" font-family="Courier" font-size="14" font-weight="bold" text-anchor="end">$687.00</text>
+
+  <line x1="30" y1="405" x2="270" y2="405" stroke="#ccc"/>
+
+  <text x="30" y="425" font-family="Arial" font-size="10" fill="#666">Payment: Visa ***4521</text>
+
+  <text x="150" y="445" text-anchor="middle" font-family="Arial" font-size="9" fill="#888">Thank you for staying with Marriott!</text>
+</svg>

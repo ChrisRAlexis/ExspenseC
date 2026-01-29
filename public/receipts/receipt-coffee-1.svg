@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="350" viewBox="0 0 280 350">
+  <rect fill="#faf9f6" width="280" height="350"/>
+  <rect fill="#1e3932" x="10" y="10" width="260" height="45" rx="4"/>
+
+  <text x="140" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-weight="bold" fill="white">STARBUCKS</text>
+
+  <text x="140" y="75" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">Store #4521 - Chicago, IL</text>
+  <text x="140" y="88" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">540 N Michigan Ave</text>
+
+  <line x1="25" y1="100" x2="255" y2="100" stroke="#ddd"/>
+
+  <text x="25" y="120" font-family="Courier" font-size="9">01/16/2026  8:15 AM</text>
+  <text x="25" y="135" font-family="Courier" font-size="9">Register: 2  Barista: Sarah</text>
+
+  <line x1="25" y1="150" x2="255" y2="150" stroke="#ddd" stroke-dasharray="3"/>
+
+  <text x="25" y="175" font-family="Courier" font-size="10">1 Venti Pike Place     $3.45</text>
+  <text x="25" y="195" font-family="Courier" font-size="10">1 Gr Bacon Gouda       $5.95</text>
+  <text x="25" y="215" font-family="Courier" font-size="10">1 Tall Latte           $4.75</text>
+
+  <line x1="25" y1="235" x2="255" y2="235" stroke="#ddd" stroke-dasharray="3"/>
+
+  <text x="25" y="258" font-family="Courier" font-size="10">Subtotal              $14.15</text>
+  <text x="25" y="275" font-family="Courier" font-size="10">Tax                    $1.25</text>
+
+  <line x1="25" y1="290" x2="255" y2="290" stroke="#333"/>
+
+  <text x="25" y="315" font-family="Courier" font-size="12" font-weight="bold">TOTAL                $15.40</text>
+
+  <text x="140" y="345" text-anchor="middle" font-family="Arial" font-size="8" fill="#888">⭐ You earned 30 Stars!</text>
+</svg>
